@@ -30,8 +30,7 @@ $(document).ready(function() {
         $('.type1').toggleClass($(this).text());
         $('.type1').text($(this).text());
         typeOne = $(this).text();
-        typeOne = typeOne.replace(/\W+/g, "").toLowerCase();
-        console.log(typeOne);
+        typeOne = eval(typeOne.toLowerCase());
         $('.super').text(typeOne.super);
     });
     
