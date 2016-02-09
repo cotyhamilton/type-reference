@@ -15,13 +15,11 @@ $(document).ready(function() {
     
     
     $('.type').on('click', function() {
-        if(typeOne) {
-            if(typeTwo) {
-                $('.clear').click(); $('.type1').toggleClass($(this).text());
-                $('.type1').text($(this).text());
-                typeOne = $(this).text();
-                return;
-            }
+        if(typeTwo) {
+            $('.clear').click();
+        }
+        
+        else if(typeOne && !typeTwo) {
             $('.type2').toggleClass($(this).text());
             $('.type2').text($(this).text());
             typeTwo = $(this).text();
@@ -31,6 +29,7 @@ $(document).ready(function() {
         $('.type1').text($(this).text());
         typeOne = $(this).text();
         typeOne = eval(typeOne.toLowerCase());
+        $('.super, .weak, .halfFrom, .halfTo').empty();
         $('.super').text(typeOne.super);
         $('.weak').text(typeOne.weak);
         $('.halfFrom').text(typeOne.halfFrom);
@@ -44,6 +43,7 @@ $(document).ready(function() {
         typeTwo = "";
         $('.type1').text('');
         $('.type2').text('');
+        $('.super, .weak, .halfFrom, .halfTo').empty();
     })
     
     
