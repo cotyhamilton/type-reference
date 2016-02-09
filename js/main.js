@@ -32,6 +32,9 @@ $(document).ready(function() {
         typeOne = $(this).text();
         typeOne = eval(typeOne.toLowerCase());
         $('.super').text(typeOne.super);
+        $('.weak').text(typeOne.weak);
+        $('.halfFrom').text(typeOne.halfFrom);
+        $('.halfTo').text(typeOne.halfTo);
     });
     
     $('.clear').on('click', function() {
