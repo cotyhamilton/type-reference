@@ -56,6 +56,29 @@ $(document).ready(function() {
     flying.halfTo = ['electric', 'rock', 'steel'];
     flying.immune = ['ground'];
     
+    ghost.super = ['ghost', 'psychic'];
+    ghost.weak = ['ghost', 'dark'];
+    ghost.halfFrom = ['bug', 'poison'];
+    ghost.halfTo = ['dark'];
+    ghost.cantDamage = ['normal'];
+    ghost.immune = ['normal', 'fight'];
+    
+    grass.super = ['ground', 'rock', 'water'];
+    grass.weak = ['bug', 'fire', 'flying', 'ice', 'poison'];
+    grass.halfFrom = ['electric', 'grass', 'ground', 'water'];
+    grass.halfTo = ['bug', 'dragon', 'grass', 'fire', 'flying', 'poison', 'steel'];
+    
+    ground.super = ['electric', 'fire', 'poison', 'rock', 'steel'];
+    ground.weak = ['grass', 'ice', 'water'];
+    ground.halfFrom = ['poison', 'rock'];
+    ground.halfTo = ['bug', 'grasss'];
+    ground.cantDamage = ['flying'];
+    ground.immune = ['electric'];
+    
+    ice.super = ['dragon', 'flying', 'grass', 'ground'];
+    ice.weak = ['fight', 'fire', 'rock', 'steel'];
+    ice.halfFrom = ['ice'];
+    ice.halfTo = ['fire', 'ice', 'steel', 'water'];
     
     
     function emptyHeadings() {
@@ -88,24 +111,14 @@ $(document).ready(function() {
         // x1/2 damage
         
         for (var i = 0; i < firstType.halfFrom.length; i++) {
-            if ($.inArray(firstType.halfFrom[i], secondType.weak) >= 0) {
+            if ($.inArray(firstType.halfFrom[i], secondType.weak) < 0 && $.inArray(firstType.halfFrom[i], secondType.halfFrom) < 0) {
                 halfWeak.push(firstType.halfFrom[i]);
-            }
-        }
-        for (var i = 0; i < secondType.weak.length; i++) {
-            if ($.inArray(secondType.weak[i], firstType.halfFrom) >= 0 && $.inArray(secondType.weak[i], halfWeak) < 0) {
-                halfWeak.push(secondType.weak[i]);
             }
         }
         
         for (var i = 0; i < secondType.halfFrom.length; i++) {
-            if ($.inArray(secondType.halfFrom[i], firstType.weak) >= 0) {
+            if ($.inArray(secondType.halfFrom[i], firstType.weak) < 0 && $.inArray(secondType.halfFrom[i], firstType.halfFrom) < 0 && $.inArray(secondType.halfFrom[i], halfWeak) < 0) {
                 halfWeak.push(secondType.halfFrom[i]);
-            }
-        }
-        for (var i = 0; i < firstType.weak.length; i++) {
-            if ($.inArray(firstType.weak[i], secondType.halfFrom) >= 0 && $.inArray(firstType.weak[i], halfWeak) < 0) {
-                halfWeak.push(firstType.weak[i]);
             }
         }
         
@@ -115,20 +128,10 @@ $(document).ready(function() {
         }
         
         // x2 damage
-        
-        for (var i = 0; i < firstType.halfFrom.length; i++) {
-            if ($.inArray(firstType.halfFrom[i], secondType.weak) < 0 && $.inArray(firstType.halfFrom[i], secondType.halfFrom) < 0 && $.inArray(firstType.halfFrom[i], doubleWeak) < 0) {
-                doubleWeak.push(firstType.halfFrom[i]);
-            }
-        }
+
         for (var i = 0; i < firstType.weak.length; i++) {
             if ($.inArray(firstType.weak[i], secondType.halfFrom) < 0 && $.inArray(firstType.weak[i], secondType.weak) < 0 && $.inArray(firstType.weak[i], doubleWeak) < 0) {
                 doubleWeak.push(firstType.weak[i]);
-            }
-        }
-        for (var i = 0; i < secondType.halfFrom.length; i++) {
-            if ($.inArray(secondType.halfFrom[i], firstType.weak) < 0 && $.inArray(secondType.halfFrom[i], firstType.halfFrom) < 0 && $.inArray(secondType.halfFrom[i], doubleWeak) < 0) {
-                doubleWeak.push(secondType.halfFrom[i]);
             }
         }
         for (var i = 0; i < secondType.weak.length; i++) {
