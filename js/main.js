@@ -4,10 +4,10 @@ $(document).ready(function() {
         typeTwo,
         twoObj,
         bug = {}, dark = {}, dragon = {},
-        electric = {},fairy = {}, fight = {},
+        electr = {},fairy = {}, fight = {},
         fire = {}, flying = {}, ghost = {}, 
         grass = {}, ground = {}, ice = {},
-        normal = {}, poison = {}, psychic = {},
+        normal = {}, poison = {}, psychc = {},
         rock = {}, steel = {}, water = {};
     
     bug.super = ['psychic', 'grass', 'dark'];
@@ -35,8 +35,9 @@ $(document).ready(function() {
             }
         }
         for (var i = 0; i < secondType.weak.length; i++) {
-            if ($.inArray(secondType.weak[i], firstType.weak) >= 0 && $.inArray(secondType.weak[i], quadWeak) < 0)
+            if ($.inArray(secondType.weak[i], firstType.weak) >= 0 && $.inArray(secondType.weak[i], quadWeak) < 0) {
                 quadWeak.push(secondType.weak[i]);
+            }
         }
         $('.head-one').text("4X DAMAGE FROM")
         $('.sub-one').text(quadWeak);
