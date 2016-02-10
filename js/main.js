@@ -15,10 +15,48 @@ $(document).ready(function() {
     bug.halfFrom = ['fight', 'grass', 'ground'];
     bug.halfTo = ['fight', 'fire', 'flying', 'ghost', 'poison', 'steel', 'fairy'];
     
+    dark.super = ['ghost', 'psychic'];
+    dark.weak = ['bug', 'fight', 'fairy'];
+    dark.halfFrom = ['dark', 'ghost'];
+    dark.halfTo = ['dark', 'fight', 'fairy'];
+    dark.immune = ['psychic'];
+    
+    dragon.super = ['dragon'];
+    dragon.weak = ['dragon', 'ice', 'fairy'];
+    dragon.halfFrom = ['electric', 'fire', 'grass', 'water'];
+    dragon.halfTo = ['steel'];
+    dragon.cantDamage = ['fairy'];
+    
+    electr.super = ['flying', 'water'];
+    electr.weak = ['ground'];
+    electr.halfFrom = ['electric', 'flying', 'steel'];
+    electr.halfTo = ['dragon', 'electric', 'grass'];
+    electr.cantDamage = ['ground'];
+    
+    fairy.super = ['dark', 'dragon', 'fight'];
+    fairy.weak = ['poison', 'steel'];
+    fairy.halfFrom = ['bug', 'dark', 'fight'];
+    fairy.halfTo = ['fire', 'poison', 'steel'];
+    fairy.immunity = ['dragon'];
+    
+    fight.super = ['dark', 'ice', 'normal', 'rock', 'steel'];
+    fight.weak = ['fairy', 'flying', 'psychic'];
+    fight.halfFrom = ['bug', 'dark', 'rock'];
+    fight.halfTo = ['bug', 'fairy', 'flying', 'poison', 'psychic'];
+    fight.cantDamage = ['ghost'];
+    
     fire.super = ['bug', 'grass', 'ice', 'steel'];
     fire.weak = ['ground', 'rock', 'water'];
     fire.halfFrom = ['bug', 'fairy', 'fire', 'grass', 'ice', 'steel'];
     fire.halfTo = ['dragon', 'fire', 'rock', 'water'];
+    
+    flying.super = ['bug', 'fight', 'grass'];
+    flying.weak = ['electric', 'ice', 'rock'];
+    flying.halfFrom = ['bug', 'fight', 'grass'];
+    flying.halfTo = ['electric', 'rock', 'steel'];
+    flying.immune = ['ground'];
+    
+    
     
     function emptyHeadings() {
         $('.sub-one, .sub-two, .sub-three, .sub-four, .sub-five, .sub-six, .head-one, .head-two, .head-three, .head-four, .head-five, .head-six').empty();
@@ -39,8 +77,10 @@ $(document).ready(function() {
                 quadWeak.push(secondType.weak[i]);
             }
         }
-        $('.head-one').text("4X DAMAGE FROM")
-        $('.sub-one').text(quadWeak);
+        if (quadWeak.length) {
+            $('.head-one').text("4X DAMAGE FROM")
+            $('.sub-one').text(quadWeak);
+        }
     }
     
     function displayTypeOne(str, obj) {
