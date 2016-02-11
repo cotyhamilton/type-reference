@@ -80,6 +80,40 @@ $(document).ready(function() {
     ice.halfFrom = ['ice'];
     ice.halfTo = ['fire', 'ice', 'steel', 'water'];
     
+    normal.super = [];
+    normal.weak = ['fight'];
+    normal.halfFrom = [];
+    normal.halfTo = ['rock', 'steel'];
+    normal.cantDamage = ['ghost'];
+    normal.immune = ['ghost'];
+    
+    poison.super = ['grass', 'fairy'];
+    poison.weak = ['ground', 'psychic'];
+    poison.halfFrom = ['bug', 'fairy', 'fight', 'grass', 'poison'];
+    poison.halfTo = ['ghost', 'ground', 'poison', 'rock'];
+    poison.cantDamage = ['steel'];
+    
+    psychc.super = ['fight', 'poison'];
+    psychc.weak = ['bug', 'dark', 'ghost'];
+    psychc.halfFrom = ['fight', 'psychc'];
+    psychc.halfTo = ['psychc', 'steel'];
+    psychc.cantDamage = ['dark'];
+    
+    rock.super = ['bug', 'fire', 'flying', 'ice'];
+    rock.weak = ['fight', 'grass', 'ground', 'steel', 'water'];
+    rock.halfFrom = ['fire', 'flying', 'normal', 'poison'];
+    rock.halfTo = ['fight', 'ground', 'steel'];
+    
+    steel.super = ['fairy', 'ice', 'rock'];
+    steel.weak = ['fight', 'fire', 'ground'];
+    steel.halfFrom = ['bug', 'dragon', 'fairy', 'flying', 'grass', 'ice', 'normal', 'psychic', 'rock', 'steel'];
+    steel.halfTo = ['electric', 'fire', 'steel', 'water'];
+    steel.immune = ['poison'];
+    
+    water.super = ['fire', 'ground', 'rock'];
+    water.weak = ['electric', 'grass'];
+    water.halfFrom = ['fire', 'ice', 'steel', 'water'];
+    water.halfTo = ['dragon', 'grass', 'water'];
     
     function emptyHeadings() {
         $('.sub-one, .sub-two, .sub-three, .sub-four, .sub-five, .sub-six, .head-one, .head-two, .head-three, .head-four, .head-five, .head-six').empty();
@@ -184,6 +218,11 @@ $(document).ready(function() {
         }
     }
     
+    function displayTypeTwo(str, obj, obj2) {
+        $('.type2').toggleClass(str);
+        $('.type2').text(str);
+        defense(obj, obj2);
+    }
     
     $('.type').on('click', function() {
         if(typeTwo) {
@@ -192,11 +231,9 @@ $(document).ready(function() {
         
         else if(typeOne && !typeTwo) {
             emptyHeadings();
-            $('.type2').toggleClass($(this).text());
-            $('.type2').text($(this).text());
             typeTwo = $(this).text();
             twoObj = eval(typeTwo.toLowerCase());
-            defense(oneObj, twoObj);
+            displayTypeTwo(typeTwo, oneObj, twoObj);
             return;
         }
         typeOne = $(this).text();
