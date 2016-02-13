@@ -10,6 +10,8 @@ $(document).ready(function() {
         normal = {}, poison = {}, psychc = {},
         rock = {}, steel = {}, water = {};
     
+    //bug.offense = [1,2,1,1,.5,.5,.5,.5,.5,2,1,1,1,.5,2,1,.5,1]
+    //bug.defense = [1,1,1,1,1,.5,2,2,1,.5,.5,1,1,1,1,2,1,1]
     bug.super = ['psychic', 'grass', 'dark'];
     bug.weak = ['fire', 'flying', 'rock'];
     bug.halfFrom = ['fight', 'grass', 'ground'];
@@ -80,9 +82,7 @@ $(document).ready(function() {
     ice.halfFrom = ['ice'];
     ice.halfTo = ['fire', 'ice', 'steel', 'water'];
     
-    normal.super = [];
     normal.weak = ['fight'];
-    normal.halfFrom = [];
     normal.halfTo = ['rock', 'steel'];
     normal.cantDamage = ['ghost'];
     normal.immune = ['ghost'];
@@ -215,6 +215,14 @@ $(document).ready(function() {
         if (obj.halfTo) {
             $('.head-four').text("1/2X DAMAGE TO");
             $('.sub-four').text(obj.halfTo);
+        }
+        if (obj.cantDamage) {
+            $('.head-five').text("CAN'T DAMAGE");
+            $('.sub-five').text(obj.cantDamage);
+        }
+        if(obj.immune) {
+            $('.head-six').text("IMMUNE TO");
+            $('.sub-six').text(obj.immune);
         }
     }
     
