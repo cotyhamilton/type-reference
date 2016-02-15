@@ -9,49 +9,43 @@
         <script type="text/javascript" src="js/main2.js"></script>
 	</head>
 	<body>
-        <table>
-            <tr>
-                <td><div class="bug type">BUG</div></td>
-                <td><div class="dark type">DARK</div></td>
-                <td><div class="dragon type">DRAGON</div></td>
-                <td><div class="electr type">ELECTR</div></td>
-                <td><div class="fairy type">FAIRY</div></td>
-                <td><div class="fight type">FIGHT</div></td>
-            </tr>
-            <tr>
-                <td><div class="fire type">FIRE</div></td>
-                <td><div class="flying type">FLYING</div></td>
-                <td><div class="ghost type">GHOST</div></td>
-                <td><div class="grass type">GRASS</div></td>
-                <td><div class="ground type">GROUND</div></td>
-                <td><div class="ice type">ICE</div></td>
-            </tr>
-            <tr>
-                <td><div class="normal type">NORMAL</div></td>
-                <td><div class="poison type">POISON</div></td>
-                <td><div class="psychc type">PSYCHC</div></td>
-                <td><div class="rock type">ROCK</div></td>
-                <td><div class="steel type">STEEL</div></td>
-                <td><div class="water type">WATER</div></td>
-            </tr>
-        </table>
+        <div class="flexbox-container">
+            <div class="bug type">BUG</div>
+            <div class="dark type">DARK</div>
+            <div class="dragon type">DRAGON</div>
+            <div class="electr type">ELECTR</div>
+            <div class="fairy type">FAIRY</div>
+            <div class="fight type">FIGHT</div>
+            <div class="fire type">FIRE</div>
+            <div class="flying type">FLYING</div>
+            <div class="ghost type">GHOST</div>
+            <div class="grass type">GRASS</div>
+            <div class="ground type">GROUND</div>
+            <div class="ice type">ICE</div>
+            <div class="normal type">NORMAL</div>
+            <div class="poison type">POISON</div>
+            <div class="psychc type">PSYCHC</div>
+            <div class="rock type">ROCK</div>
+            <div class="steel type">STEEL</div>
+            <div class="water type">WATER</div>
+        </div>
         <div class="clear">
             <p>clear</p>
         </div>
         <div class="board">
-            <div class="type1 active"></div>
-            <div class="type2 active"></div>
+            <div class="type1 active type"></div>
+            <div class="type2 active type"></div>
         </div>
         <div class="bottom flexbox-container">
             <div class="good flex-item">
-                <div class="heading"><h2>2X DAMAGE TO</h2><div class="sub-one"></div></div>
-                <div class="heading"><h2>1/2X DAMAGE FROM</h2><div class="sub-two"></div></div>
-                <div class="heading black"><h2>IMMUNE TO</h2><div class="sub-three"></div></div>
+                <div class="heading"><h2 class="head-one"></h2><div class="sub-one flexbox-container"></div></div>
+                <div class="heading"><h2 class="head-two"></h2><div class="sub-two flexbox-container"></div></div>
+                <div class="heading black"><h2>IMMUNE TO</h2><div class="sub-three sub"></div></div>
             </div>
             <div class="bad flex-item">
-                <div class="heading"><h2>2X DAMAGE FROM</h2><div class="sub-four"></div></div>
-                <div class="heading"><h2>1/2X DAMAGE TO</h2><div class="sub-five"></div></div>
-                <div class="heading black"><h2>CAN'T DAMAGE</h2><div class="sub-six"></div></div>
+                <div class="heading"><h2 class="head-four"></h2><div class="sub-four flexbox-container"></div></div>
+                <div class="heading"><h2 class="head-five"></h2><div class="sub-five flexbox-container"></div></div>
+                <div class="heading black"><h2>CAN'T DAMAGE</h2><div class="sub-six sub"></div></div>
             </div>
         </div>
     </body>

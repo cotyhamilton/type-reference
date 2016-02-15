@@ -76,6 +76,20 @@ $(document).ready(function() {
         $('.sub-one, .sub-two, .sub-three, .sub-four, .sub-five, .sub-six, .head-one, .head-two, .head-three, .head-four, .head-five, .head-six').empty();
     }
     
+    function fillOneTypeHead() {
+        $('.head-one').text("2X DAMAGE TO");
+        $('.head-two').text("1/2 DAMAGE FROM");
+        $('.head-four').text("2X DAMAGE FROM");
+        $('.head-five').text("1/2 DAMAGE TO");
+    }
+    
+    function fillTwoTypeHead() {
+        $('.head-one').text("1/4 DAMAGE FROM");
+        $('.head-two').text("1/2 DAMAGE FROM");
+        $('.head-four').text("2X DAMAGE FROM");
+        $('.head-five').text("4X DAMAGE FROM");
+    }
+    
     function returnTypeName(i) {
         switch (i) {
             case 0:
@@ -145,25 +159,26 @@ $(document).ready(function() {
             }
         }
         
-        if (quarterWeak.length) {
-            $('.head-one').text("1/4X DAMAGE FROM");
-            $('.sub-one').text(quarterWeak);
+        fillTwoTypeHead();
+        
+        
+        for (var i = 0; i < quarterWeak.length; i++) {
+            $('.sub-one').append('<div class="'+quarterWeak[i]+' type">'+quarterWeak[i]+'</div>')
         }
-        if (halfWeak.length) {
-            $('.head-two').text("1/2X DAMAGE FROM");
-            $('.sub-two').text(halfWeak);
+        
+        for (var i = 0; i < halfWeak.length; i++) {
+            $('.sub-two').append('<div class="'+halfWeak[i]+' type">'+halfWeak[i]+'</div>')
         }
-        if (immun.length) {
-            $('.head-three').text("IMMUNE TO");
-            $('.sub-three').text(immun);
+        
+        for (var i = 0; i < immun.length; i++) {
+            $('.sub-three').append('<div class="'+immun[i]+' type">'+immun[i]+'</div>')
         }
-        if (doubleWeak.length) {
-            $('.head-four').text("2X DAMAGE FROM");
-            $('.sub-four').text(doubleWeak);
+        
+        for (var i = 0; i < doubleWeak.length; i++) {
+            $('.sub-four').append('<div class="'+doubleWeak[i]+' type">'+doubleWeak[i]+'</div>')
         }
-        if (quadWeak.length) {
-            $('.head-five').text("4X DAMAGE FROM");
-            $('.sub-five').text(quadWeak);
+        for (var i = 0; i < quadWeak.length; i++) {
+            $('.sub-five').append('<div class="'+quadWeak[i]+' type">'+quadWeak[i]+'</div>')
         }
     }
     
@@ -201,30 +216,31 @@ $(document).ready(function() {
             }
         }
         
-        if (superTo.length) {
-            $('.head-one').text("2X DAMAGE TO");
-            $('.sub-one').text(superTo);
+        fillOneTypeHead();
+        
+        for (var i = 0; i < superTo.length; i++) {
+            $('.sub-one').append('<div class="'+superTo[i]+' type">'+superTo[i]+'</div>')
         }
-        if (halfFrom.length) {
-            $('.head-two').text("1/2X DAMAGE FROM");
-            $('.sub-two').text(halfFrom);
+        
+        for (var i = 0; i < halfFrom.length; i++) {
+            $('.sub-two').append('<div class="'+halfFrom[i]+' type">'+halfFrom[i]+'</div>')
         }
-        if (zeroFrom.length) {
-            $('.head-three').text("IMMUNE TO");
-            $('.sub-three').text(zeroFrom);
+        
+        for (var i = 0; i < zeroFrom.length; i++) {
+            $('.sub-three').append('<div class="'+zeroFrom[i]+' type">'+zeroFrom[i]+'</div>')
         }
-        if (superFrom.length) {
-            $('.head-four').text("2X DAMAGE FROM");
-            $('.sub-four').text(superFrom);
+        
+        for (var i = 0; i < superFrom.length; i++) {
+            $('.sub-four').append('<div class="'+superFrom[i]+' type">'+superFrom[i]+'</div>')
         }
-        if (halfTo.length) {
-            $('.head-five').text("1/2X DAMAGE TO");
-            $('.sub-five').text(halfTo);
+        for (var i = 0; i < halfTo.length; i++) {
+            $('.sub-five').append('<div class="'+halfTo[i]+' type">'+halfTo[i]+'</div>')
         }
-        if (zeroTo.length) {
-            $('.head-six').text("CANT DAMAGE");
-            $('.sub-six').text(zeroTo);
+        for (var i = 0; i < zeroTo.length; i++) {
+            $('.sub-six').append('<div class="'+zeroTo[i]+' type">'+zeroTo[i]+'</div>')
         }
+        
+        
     }
     
     function displayTypeTwo(str, obj, obj2) {
@@ -259,7 +275,10 @@ $(document).ready(function() {
         $('.type1').text('');
         $('.type2').text('');
         emptyHeadings();
+        fillOneTypeHead();
     })
+    
+    fillOneTypeHead();
     
     
 });
