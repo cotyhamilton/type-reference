@@ -1,3 +1,23 @@
+.flexbox-container {
+    padding: 40px 0px 0px 0px;
+    margin: 0;
+    list-style: none;
+  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.flex-item {
+    margin: 10px 10px 10px 10px;
+    border-radius: 16px;
+}
+
 body {
     background-color: #F8F8F8;
 }
@@ -146,7 +166,35 @@ td div {
     text-shadow: 2px 0 #666, 0 2px #666, 1px 0 black, 0 1px black;
 }
 
+.heading {
+    height: 100
+}
+
 .bottom {
     font-family: helvetica;
     font-weight: 100;
+    text-align: center;
+}
+
+.good {
+    background-color: #d2f3b1;
+    width: 400px;
+    height: 340px;
+}
+
+.bad {
+    background-color: #ffd4d4;
+    width: 400px;
+    height: 340px;
+}
+
+.black {
+    height: 80;
+    background-color: #333333;
+    color: #efefef;
+    border-radius: 15px;
+}
+
+.black h2 {
+    padding-top: 5px;
 }
