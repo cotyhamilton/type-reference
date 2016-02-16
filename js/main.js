@@ -9,226 +9,244 @@ $(document).ready(function() {
         grass = {}, ground = {}, ice = {},
         normal = {}, poison = {}, psychc = {},
         rock = {}, steel = {}, water = {};
+    /*
+    offense: nX damage to, 0 = can't damage
+    defense: nX damage from, 0 = immune
     
-    //bug.offense = [1,2,1,1,.5,.5,.5,.5,.5,2,1,1,1,.5,2,1,.5,1]
-    //bug.defense = [1,1,1,1,1,.5,2,2,1,.5,.5,1,1,1,1,2,1,1]
-    bug.super = ['psychic', 'grass', 'dark'];
-    bug.weak = ['fire', 'flying', 'rock'];
-    bug.halfFrom = ['fight', 'grass', 'ground'];
-    bug.halfTo = ['fight', 'fire', 'flying', 'ghost', 'poison', 'steel', 'fairy'];
+    BUG,DARK,DRAGON,ELECTR,FAIRY,FIGHT,
+    FIRE,FLYING,GHOST,GRASS,GROUND,ICE,
+    NORMAL,POISON,PSYCHC,ROCK,STEEL,WATER
     
-    dark.super = ['ghost', 'psychic'];
-    dark.weak = ['bug', 'fight', 'fairy'];
-    dark.halfFrom = ['dark', 'ghost'];
-    dark.halfTo = ['dark', 'fight', 'fairy'];
-    dark.immune = ['psychic'];
+    */
+    bug.offense = [1,2,1,1,.5,.5, .5,.5,.5,2,1,1, 1,.5,2,1,.5,1];
+    bug.defense = [1,1,1,1,1,.5, 2,2,1,.5,.5,1, 1,1,1,2,1,1];
     
-    dragon.super = ['dragon'];
-    dragon.weak = ['dragon', 'ice', 'fairy'];
-    dragon.halfFrom = ['electric', 'fire', 'grass', 'water'];
-    dragon.halfTo = ['steel'];
-    dragon.cantDamage = ['fairy'];
+    dark.offense = [1,.5,1,1,.5,.5, 1,1,2,1,1,1, 1,1,2,1,1,1];
+    dark.defense = [2,.5,1,1,2,2, 1,1,.5,1,1,1, 1,1,0,1,1,1];
     
-    electr.super = ['flying', 'water'];
-    electr.weak = ['ground'];
-    electr.halfFrom = ['electric', 'flying', 'steel'];
-    electr.halfTo = ['dragon', 'electric', 'grass'];
-    electr.cantDamage = ['ground'];
+    dragon.offense = [1,1,2,1,0,1, 1,1,1,1,1,1, 1,1,1,1,.5,1];
+    dragon.defense = [1,1,2,.5,2,1, .5,1,1,.5,1,2, 1,1,1,1,1,.5];
     
-    fairy.super = ['dark', 'dragon', 'fight'];
-    fairy.weak = ['poison', 'steel'];
-    fairy.halfFrom = ['bug', 'dark', 'fight'];
-    fairy.halfTo = ['fire', 'poison', 'steel'];
-    fairy.immunity = ['dragon'];
+    electr.offense = [1,1,.5,.5,1,1, 1,2,1,.5,0,1, 1,1,1,1,1,2];
+    electr.defense = [1,1,1,.5,1,1, 1,.5,1,1,2,1, 1,1,1,1,.5,1];
     
-    fight.super = ['dark', 'ice', 'normal', 'rock', 'steel'];
-    fight.weak = ['fairy', 'flying', 'psychic'];
-    fight.halfFrom = ['bug', 'dark', 'rock'];
-    fight.halfTo = ['bug', 'fairy', 'flying', 'poison', 'psychic'];
-    fight.cantDamage = ['ghost'];
+    fairy.offense = [1,2,2,1,1,2, .5,1,1,1,1,1, 1,.5,1,1,.5,1];
+    fairy.defense = [.5,.5,0,1,1,.5, 1,1,1,1,1,1, 1,2,1,1,2,1];
     
-    fire.super = ['bug', 'grass', 'ice', 'steel'];
-    fire.weak = ['ground', 'rock', 'water'];
-    fire.halfFrom = ['bug', 'fairy', 'fire', 'grass', 'ice', 'steel'];
-    fire.halfTo = ['dragon', 'fire', 'rock', 'water'];
+    fight.offense = [.5,2,1,1,.5,1, 1,.5,0,1,1,2, 2,.5,.5,2,2,1];
+    fight.defense = [.5,.5,1,1,2,1, 1,2,1,1,1,1, 1,1,2,.5,1,1];
     
-    flying.super = ['bug', 'fight', 'grass'];
-    flying.weak = ['electric', 'ice', 'rock'];
-    flying.halfFrom = ['bug', 'fight', 'grass'];
-    flying.halfTo = ['electric', 'rock', 'steel'];
-    flying.immune = ['ground'];
+    fire.offense = [2,1,.5,1,1,1, .5,1,1,2,1,2, 1,1,1,.5,2,.5];
+    fire.defense = [.5,1,1,1,.5,1, .5,1,1,.5,2,.5, 1,1,1,2,.5,2];
     
-    ghost.super = ['ghost', 'psychic'];
-    ghost.weak = ['ghost', 'dark'];
-    ghost.halfFrom = ['bug', 'poison'];
-    ghost.halfTo = ['dark'];
-    ghost.cantDamage = ['normal'];
-    ghost.immune = ['normal', 'fight'];
+    flying.offense = [2,1,1,.5,1,2, 1,1,1,2,1,1, 1,1,1,.5,.5,1];
+    flying.defense = [.5,1,1,2,1,.5, 1,1,1,.5,0,2, 1,1,1,2,1,1];
     
-    grass.super = ['ground', 'rock', 'water'];
-    grass.weak = ['bug', 'fire', 'flying', 'ice', 'poison'];
-    grass.halfFrom = ['electric', 'grass', 'ground', 'water'];
-    grass.halfTo = ['bug', 'dragon', 'grass', 'fire', 'flying', 'poison', 'steel'];
+    ghost.offense = [1,.5,1,1,1,1, 1,1,2,1,1,1, 0,1,2,1,1,1];
+    ghost.defense = [.5,2,1,1,1,0, 1,1,2,1,1,1, 0,.5,1,1,1,1];
     
-    ground.super = ['electric', 'fire', 'poison', 'rock', 'steel'];
-    ground.weak = ['grass', 'ice', 'water'];
-    ground.halfFrom = ['poison', 'rock'];
-    ground.halfTo = ['bug', 'grasss'];
-    ground.cantDamage = ['flying'];
-    ground.immune = ['electric'];
+    grass.offense = [.5,1,.5,1,1,1, .5,.5,1,.5,2,1, 1,.5,1,2,.5,2];
+    grass.defense = [2, 1,1,.5,1,1, 2,2,1,.5,.5,2, 1,2,1,1,1,.5];
     
-    ice.super = ['dragon', 'flying', 'grass', 'ground'];
-    ice.weak = ['fight', 'fire', 'rock', 'steel'];
-    ice.halfFrom = ['ice'];
-    ice.halfTo = ['fire', 'ice', 'steel', 'water'];
+    ground.offense = [.5,1,1,2,1,1, 2,0,1,.5,1,1, 1,2,1,2,2];
+    ground.defense = [1,1,1,0,1,1, 1,1,1,2,1,2, 1,.5,1,.5,1,2];
     
-    normal.weak = ['fight'];
-    normal.halfTo = ['rock', 'steel'];
-    normal.cantDamage = ['ghost'];
-    normal.immune = ['ghost'];
+    ice.offense = [1,1,2,1,1,1, .5,2,1,2,2,.5, 1,1,1,1,.5,.5];
+    ice.defense = [1,1,1,1,1,2, 2,1,1,1,1,.5, 1,1,1,2,2,1];
     
-    poison.super = ['grass', 'fairy'];
-    poison.weak = ['ground', 'psychic'];
-    poison.halfFrom = ['bug', 'fairy', 'fight', 'grass', 'poison'];
-    poison.halfTo = ['ghost', 'ground', 'poison', 'rock'];
-    poison.cantDamage = ['steel'];
+    normal.offense = [1,1,1,1,1,1, 1,1,0,1,1,1, 1,1,1,.5,.5,1];
+    normal.defense = [1,1,1,1,1,2, 1,1,0,1,1,1, 1,1,1,1,1,1];
     
-    psychc.super = ['fight', 'poison'];
-    psychc.weak = ['bug', 'dark', 'ghost'];
-    psychc.halfFrom = ['fight', 'psychc'];
-    psychc.halfTo = ['psychc', 'steel'];
-    psychc.cantDamage = ['dark'];
+    poison.offense = [1,1,1,1,2,1, 1,1,.5,2,.5,1, 1,.5,1,.5,0,1];
+    poison.defense = [.5,1,1,1.5,.5, 1,1,1,.5,2,1, 1,.5,2,1,1,1];
     
-    rock.super = ['bug', 'fire', 'flying', 'ice'];
-    rock.weak = ['fight', 'grass', 'ground', 'steel', 'water'];
-    rock.halfFrom = ['fire', 'flying', 'normal', 'poison'];
-    rock.halfTo = ['fight', 'ground', 'steel'];
+    psychc.offense = [1,0,1,1,1,2, 1,1,1,1,1,1, 1,2,.5,1,.5,1];
+    psychc.defense = [2,2,1,1,1,.5, 1,1,2,1,1,1, 1,1,.5,1,1,1];
     
-    steel.super = ['fairy', 'ice', 'rock'];
-    steel.weak = ['fight', 'fire', 'ground'];
-    steel.halfFrom = ['bug', 'dragon', 'fairy', 'flying', 'grass', 'ice', 'normal', 'psychic', 'rock', 'steel'];
-    steel.halfTo = ['electric', 'fire', 'steel', 'water'];
-    steel.immune = ['poison'];
+    rock.offense = [2,1,1,1,1,.5, 2,2,1,1,.5,2, 1,1,1,1,.5,1];
+    rock.defense = [1,1,1,1,1,2, .5,.5,1,2,2,1, .5,.5,1,1,2,2];
     
-    water.super = ['fire', 'ground', 'rock'];
-    water.weak = ['electric', 'grass'];
-    water.halfFrom = ['fire', 'ice', 'steel', 'water'];
-    water.halfTo = ['dragon', 'grass', 'water'];
+    steel.offense = [1,1,1,.5,2,1, .5,1,1,1,1,2, 1,1,1,2,.5,.5];
+    steel.defense = [.5,1,.5,1,.5,2, 2,.5,1,.5,2,.5, .5,0,.5,.5,.5,1];
+    
+    water.offense = [1,1,.5,1,1,1, 2,1,1,.5,2,1, 1,1,1,2,1,.5];
+    water.defense = [1,1,1,2,1,1, .5,1,1,2,1,.5, 1,1,1,1,.5,.5];
     
     function emptyHeadings() {
         $('.sub-one, .sub-two, .sub-three, .sub-four, .sub-five, .sub-six, .head-one, .head-two, .head-three, .head-four, .head-five, .head-six').empty();
     }
     
+    function fillOneTypeHead() {
+        $('.head-one').text("2X DAMAGE TO");
+        $('.head-two').text("1/2 DAMAGE FROM");
+        $('.head-four').text("2X DAMAGE FROM");
+        $('.head-five').text("1/2 DAMAGE TO");
+    }
+    
+    function fillTwoTypeHead() {
+        $('.head-one').text("1/4 DAMAGE FROM");
+        $('.head-two').text("1/2 DAMAGE FROM");
+        $('.head-four').text("2X DAMAGE FROM");
+        $('.head-five').text("4X DAMAGE FROM");
+    }
+    
+    function returnTypeName(i) {
+        switch (i) {
+            case 0:
+                return 'BUG';
+            case 1:
+                return 'DARK';
+            case 2:
+                return 'DRAGON';
+            case 3:
+                return 'ELECTR';
+            case 4:
+                return 'FAIRY';
+            case 5:
+                return 'FIGHT';
+            case 6:
+                return 'FIRE';
+            case 7:
+                return 'FLYING';
+            case 8:
+                return 'GHOST';
+            case 9:
+                return 'GRASS';
+            case 10:
+                return 'GROUND';
+            case 11:
+                return 'ICE';
+            case 12:
+                return 'NORMAL';
+            case 13:
+                return 'POISON';
+            case 14:
+                return 'PSYCHC';
+            case 15:
+                return 'ROCK';
+            case 16:
+                return 'STEEL';
+            case 17:
+                return 'WATER';
+        }
+    }
+    
     function defense(firstType, secondType) {
-        var quarterWeak = [],
+        var newDefense = [],
+            quarterWeak = [],
             halfWeak = [],
             doubleWeak = [],
-            quadWeak = [];
+            quadWeak = [],
+            immun = [];
         
-        // x1/4 damage
-        
-        for (var i = 0; i < firstType.halfFrom.length; i++) {
-            if ($.inArray(firstType.halfFrom[i], secondType.halfFrom) >= 0) {
-                quarterWeak.push(firstType.halfFrom[i]);
+        for (var i = 0; i < 18; i++) {
+            newDefense.push(firstType.defense[i] * secondType.defense[i]);
+            
+            if (newDefense[i] == .25) {
+                quarterWeak.push(returnTypeName(i));
             }
-        }
-        for (var i = 0; i < secondType.halfFrom.length; i++) {
-            if ($.inArray(secondType.halfFrom[i], firstType.halfFrom) >= 0 && $.inArray(secondType.halfFrom[i], quarterWeak) < 0) {
-                quarterWeak.push(secondType.halfFrom[i]);
+            else if (newDefense[i] == .5) {
+                halfWeak.push(returnTypeName(i));
             }
-        }
-        if (quarterWeak.length) {
-            $('.head-one').text("1/4X DAMAGE FROM")
-            $('.sub-one').text(quarterWeak);
-        }
-        
-        // x1/2 damage
-        
-        for (var i = 0; i < firstType.halfFrom.length; i++) {
-            if ($.inArray(firstType.halfFrom[i], secondType.weak) < 0 && $.inArray(firstType.halfFrom[i], secondType.halfFrom) < 0) {
-                halfWeak.push(firstType.halfFrom[i]);
+            else if (newDefense[i] == 0) {
+                immun.push(returnTypeName(i));
+            }
+            else if (newDefense[i] == 2) {
+                doubleWeak.push(returnTypeName(i));
+            }
+            else if (newDefense[i] == 4) {
+                quadWeak.push(returnTypeName(i));
             }
         }
         
-        for (var i = 0; i < secondType.halfFrom.length; i++) {
-            if ($.inArray(secondType.halfFrom[i], firstType.weak) < 0 && $.inArray(secondType.halfFrom[i], firstType.halfFrom) < 0 && $.inArray(secondType.halfFrom[i], halfWeak) < 0) {
-                halfWeak.push(secondType.halfFrom[i]);
-            }
+        fillTwoTypeHead();
+        
+        
+        for (var i = 0; i < quarterWeak.length; i++) {
+            $('.sub-one').append('<div class="'+quarterWeak[i]+' type">'+quarterWeak[i]+'</div>')
         }
         
-        if (halfWeak.length) {
-            $('.head-two').text("1/2X DAMAGE FROM")
-            $('.sub-two').text(halfWeak);
+        for (var i = 0; i < halfWeak.length; i++) {
+            $('.sub-two').append('<div class="'+halfWeak[i]+' type">'+halfWeak[i]+'</div>')
         }
         
-        // x2 damage
-
-        for (var i = 0; i < firstType.weak.length; i++) {
-            if ($.inArray(firstType.weak[i], secondType.halfFrom) < 0 && $.inArray(firstType.weak[i], secondType.weak) < 0 && $.inArray(firstType.weak[i], doubleWeak) < 0) {
-                doubleWeak.push(firstType.weak[i]);
-            }
-        }
-        for (var i = 0; i < secondType.weak.length; i++) {
-            if ($.inArray(secondType.weak[i], firstType.weak) < 0 && $.inArray(secondType.weak[i], firstType.halfFrom) < 0 && $.inArray(secondType.weak[i], doubleWeak) < 0) {
-                doubleWeak.push(secondType.weak[i]);
-            }
-        }
-        if (doubleWeak.length) {
-            $('.head-three').text("2X DAMAGE FROM")
-            $('.sub-three').text(doubleWeak);
+        for (var i = 0; i < immun.length; i++) {
+            $('.sub-three').append('<div class="'+immun[i]+' type">'+immun[i]+'</div>')
         }
         
-        // x4 damage
-        
-        for (var i = 0; i < firstType.weak.length; i++) {
-            if ($.inArray(firstType.weak[i], secondType.weak) >= 0) {
-                quadWeak.push(firstType.weak[i]);
-            }
+        for (var i = 0; i < doubleWeak.length; i++) {
+            $('.sub-four').append('<div class="'+doubleWeak[i]+' type">'+doubleWeak[i]+'</div>')
         }
-        for (var i = 0; i < secondType.weak.length; i++) {
-            if ($.inArray(secondType.weak[i], firstType.weak) >= 0 && $.inArray(secondType.weak[i], quadWeak) < 0) {
-                quadWeak.push(secondType.weak[i]);
-            }
-        }
-        if (quadWeak.length) {
-            $('.head-four').text("4X DAMAGE FROM")
-            $('.sub-four').text(quadWeak);
+        for (var i = 0; i < quadWeak.length; i++) {
+            $('.sub-five').append('<div class="'+quadWeak[i]+' type">'+quadWeak[i]+'</div>')
         }
     }
     
     function displayTypeOne(str, obj) {
+        var superTo = [],
+            halfFrom = [],
+            zeroFrom = [],
+            superFrom = [],
+            halfTo = [],
+            zeroTo = [];
+        
         $('.type1').toggleClass(str);
         $('.type1').text(str);
+        
         emptyHeadings();
-        if (obj.super) {
-            $('.head-one').text("2X DAMAGE TO");
-            $('.sub-one').text(obj.super);
+        
+        for (var i = 0; i < 18; i++) {
+            if (obj.offense[i] == 2) {
+                superTo.push(returnTypeName(i));
+            }
+            if (obj.offense[i] == .5) {
+                halfTo.push(returnTypeName(i));
+            }
+            if (obj.offense[i] == 0) {
+                zeroTo.push(returnTypeName(i));
+            }
+            if (obj.defense[i] == 2) {
+                superFrom.push(returnTypeName(i));
+            }
+            if (obj.defense[i] == .5) {
+                halfFrom.push(returnTypeName(i));
+            }
+            if (obj.defense[i] == 0) {
+                zeroFrom.push(returnTypeName(i));
+            }
         }
-        if (obj.weak) {
-            $('.head-two').text("2X DAMAGE FROM");
-            $('.sub-two').text(obj.weak);
+        
+        fillOneTypeHead();
+        
+        for (var i = 0; i < superTo.length; i++) {
+            $('.sub-one').append('<div class="'+superTo[i]+' type">'+superTo[i]+'</div>')
         }
-        if (obj.halfFrom) {
-            $('.head-three').text("1/2X DAMAGE FROM");
-            $('.sub-three').text(obj.halfFrom);
+        
+        for (var i = 0; i < halfFrom.length; i++) {
+            $('.sub-two').append('<div class="'+halfFrom[i]+' type">'+halfFrom[i]+'</div>')
         }
-        if (obj.halfTo) {
-            $('.head-four').text("1/2X DAMAGE TO");
-            $('.sub-four').text(obj.halfTo);
+        
+        for (var i = 0; i < zeroFrom.length; i++) {
+            $('.sub-three').append('<div class="'+zeroFrom[i]+' type">'+zeroFrom[i]+'</div>')
         }
-        if (obj.cantDamage) {
-            $('.head-five').text("CAN'T DAMAGE");
-            $('.sub-five').text(obj.cantDamage);
+        
+        for (var i = 0; i < superFrom.length; i++) {
+            $('.sub-four').append('<div class="'+superFrom[i]+' type">'+superFrom[i]+'</div>')
         }
-        if(obj.immune) {
-            $('.head-six').text("IMMUNE TO");
-            $('.sub-six').text(obj.immune);
+        for (var i = 0; i < halfTo.length; i++) {
+            $('.sub-five').append('<div class="'+halfTo[i]+' type">'+halfTo[i]+'</div>')
         }
+        for (var i = 0; i < zeroTo.length; i++) {
+            $('.sub-six').append('<div class="'+zeroTo[i]+' type">'+zeroTo[i]+'</div>')
+        }
+        
+        
     }
     
     function displayTypeTwo(str, obj, obj2) {
         $('.type2').toggleClass(str);
         $('.type2').text(str);
+        emptyHeadings();
         defense(obj, obj2);
     }
     
@@ -238,6 +256,10 @@ $(document).ready(function() {
         }
         
         else if(typeOne && !typeTwo) {
+            if (typeOne == $(this).text()) {
+                typeTwo = "";
+                return
+            }
             emptyHeadings();
             typeTwo = $(this).text();
             twoObj = eval(typeTwo.toLowerCase());
@@ -257,7 +279,10 @@ $(document).ready(function() {
         $('.type1').text('');
         $('.type2').text('');
         emptyHeadings();
+        fillOneTypeHead();
     })
+    
+    fillOneTypeHead();
     
     
 });
