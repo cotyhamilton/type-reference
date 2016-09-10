@@ -1,3 +1,7 @@
+.pokemon-search {
+    text-align: center;
+}
+
 .flexbox-container {
     margin: 0;
     list-style: none;
@@ -10,6 +14,7 @@
     flex-wrap: wrap;
     -webkit-flex-flow: row wrap;
     justify-content: center;
+    min-height: 88px;
 }
 
 .flex-item {
@@ -145,6 +150,11 @@ body {
     box-shadow: 0px 0, 0 -3px #98D8D8, 0px 0, 0 3px #807870;
 }
 
+.poke-name {
+    font-family: helvetica, sans-serif;
+    text-align: center;
+}
+
 .board {
     text-align: center;
     margin: auto;
@@ -172,7 +182,7 @@ body {
 }
 
 .bottom {
-    font-family: helvetica;
+    font-family: helvetica, sans-serif;
     font-weight: 100;
     text-align: center;
 }

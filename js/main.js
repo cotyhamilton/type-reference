@@ -250,7 +250,8 @@ $(document).ready(function() {
         defense(obj, obj2);
     }
     
-    $('.type').on('click', function() {
+    $("div").on('click', '.type', function() {
+        $('.poke-name').text('');
         if(typeTwo) {
             $('.clear').click();
         }
@@ -279,8 +280,63 @@ $(document).ready(function() {
         $('.type1').text('');
         $('.type2').text('');
         emptyHeadings();
+        $('input:text').val('');
+        $('.poke-name').text('');
         fillOneTypeHead();
     })
+
+    function getPokemon(pokemon) {
+        $('.clear').click();
+        $('.poke-name').text('LOADING ...');
+        pokemon = pokemon.toLowerCase();
+        var url = 'http://pokeapi.co/api/v2/pokemon/' + pokemon + '/';
+
+        $.getJSON(url)
+            .done(function(data) {
+                $('.poke-name').text(pokemon.toUpperCase());
+                data.types.forEach(getType);
+            })
+            .fail(error);
+        };
+    function error() {
+        $('.poke-name').text("POKEMON NOT FOUND");
+    }
+
+    function getType(element) {
+        console.log(element.type.name);
+        var type = element.type.name.toUpperCase();
+        if (type == "ELECTRIC") {type = "ELECTR"};
+        if (type == "FIGHTING") {type = "FIGHT"};
+        if (type == "PSYCHIC") {type = "PSYCHC"};
+        
+        if(typeTwo) {
+            $('.clear').click();
+        }
+        
+        else if(typeOne && !typeTwo) {
+            if (typeOne == type) {
+                typeTwo = "";
+                return
+            }
+            emptyHeadings();
+            typeTwo = type;
+            twoObj = eval(typeTwo.toLowerCase());
+            displayTypeTwo(typeTwo, oneObj, twoObj);
+            return;
+        }
+        typeOne = type;
+        oneObj = eval(typeOne.toLowerCase());
+        displayTypeOne(typeOne, oneObj);
+    }
+
+    $('#search-button').on('click', function() {
+        getPokemon($('#search-field').val());
+    });
+
+    $('input:text').focus(
+    function(){
+        $(this).val('');
+    });
     
     fillOneTypeHead();
     
