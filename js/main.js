@@ -285,26 +285,21 @@ $(document).ready(function() {
         fillOneTypeHead();
     })
 
-    function getPokemon(pokemon) {
+    function getPokemon(pokemonName) {
         $('.clear').click();
-        $('.poke-name').text('LOADING ...');
-        pokemon = pokemon.toLowerCase();
-        var url = 'http://pokeapi.co/api/v2/pokemon/' + pokemon + '/';
-
-        $.getJSON(url)
-            .done(function(data) {
-                $('.poke-name').text(pokemon.toUpperCase());
-                data.types.forEach(getType);
-            })
-            .fail(error);
-        };
-    function error() {
-        $('.poke-name').text("POKEMON NOT FOUND");
-    }
+        pokemonName = pokemonName.toLowerCase();
+        poke = (pokemon.find(function(poke) {
+            return poke.name == pokemonName;
+        }));
+        if(poke) {
+            $('.poke-name').text(pokemonName.toUpperCase());
+            poke.type.forEach(getType);
+        }
+        else {$('.poke-name').text("POKEMON NOT FOUND");}
+    };
 
     function getType(element) {
-        console.log(element.type.name);
-        var type = element.type.name.toUpperCase();
+        var type = element.toUpperCase();
         if (type == "ELECTRIC") {type = "ELECTR"};
         if (type == "FIGHTING") {type = "FIGHT"};
         if (type == "PSYCHIC") {type = "PSYCHC"};
