@@ -1,5 +1,38 @@
+body {
+    font-family: helvetica, sans-serif;
+    background-color: #eee;
+}
 .pokemon-search {
     text-align: center;
+}
+input:focus {
+    outline: none;
+}
+#box {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 0 0 5px 5px;
+    max-height: 85%;
+    margin: -.9em auto 0 auto;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    width: 220px;
+    z-index: 99;
+}
+#box ul {
+    list-style: none;
+    padding-left: 3px;
+}
+#box li {
+    border-bottom: 1px solid #efefef;
+    cursor: pointer;
+    padding: 5px;
+    text-transform: uppercase;
+}
+
+#box li:hover {
+    background-color: #efefef;
 }
 
 .flexbox-container {
@@ -15,6 +48,8 @@
     -webkit-flex-flow: row wrap;
     justify-content: center;
     min-height: 88px;
+    position: relative;
+    z-index: 1;
 }
 
 .flex-item {

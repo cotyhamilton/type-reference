@@ -251,6 +251,7 @@ $(document).ready(function() {
     }
     
     $("div").on('click', '.type', function() {
+        document.getElementById('box').innerHTML = "";
         $('.poke-name').text('');
         if(typeTwo) {
             $('.clear').click();
@@ -282,6 +283,7 @@ $(document).ready(function() {
         emptyHeadings();
         $('input:text').val('');
         $('.poke-name').text('');
+        document.getElementById('box').innerHTML = "";
         fillOneTypeHead();
     })
 
@@ -326,6 +328,10 @@ $(document).ready(function() {
 
     $('#search-button').on('click', function() {
         getPokemon($('#search-field').val());
+    });
+
+    $('#box').on('click','li',function() {    
+        getPokemon($(this).text());
     });
 
     $('input:text').focus(
